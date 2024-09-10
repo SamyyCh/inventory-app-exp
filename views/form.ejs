@@ -1,0 +1,17 @@
+<!-- views/form.ejs -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie Inventory Application</title>
+  </head>
+<body>
+  <h1>Movie Inventory Application</h1>
+  <%- include("partials/errors.ejs") %>
+  <form action="/new" method="POST">
+    <label for="movie">Movie: </label>
+    <input type="text" name="movie" id="movie" required>
+    <button type="submit">Submit</button>
+  </form>
+  <a href="/">Back to home</a>
+</body>
+</html>
