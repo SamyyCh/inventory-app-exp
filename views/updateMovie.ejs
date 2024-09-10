@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Movie</title>
+</head>
+<body>
+    <h1>Update Movie</h1>
+    <form action="/edit/<%= movie.id %>" method="POST">
+        <label for="title">Movie Title: </label>
+        <input type="text" name="title" id="title" value="<%= movie.title %>" required>
+        <label for="director">Director: </label>
+        <input type="text" name="director" id="director" value="<%= movie.director %>" required>
+        <label for="genre">Genre: </label>
+        <input type="text" name="genre" id="genre" value="<%= movie.genre %>" required>
+        <label for="actor">Main Actor: </label>
+        <input type="text" name="actor" id="actor" value="<%= movie.actor %>" required>
+        <label for="year">Year: </label>
+        <input type="text" name="year" id="year" value="<%= movie.year %>" required>
+        <button type="submit">Update</button>
+    </form>
+    <a href="/">Back to home</a>
+</body>
+</html>

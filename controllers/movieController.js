@@ -4,22 +4,28 @@ const db = require("../db/queries");
 
 async function getMovies(req, res) {
   const movies = await db.getAllMovies();
-  res.send("Movies: " + movies.map(movie => movie.title).join(", "));
-};
+  res.render("index", { movies });
+}
 
 async function createMovieGet(req, res) {
   res.render("form");
 }
 
 async function createMoviePost(req, res) {
-  const { movie } = req.body;
+  const { title, director, genre, actor, year } = req.body;
+  const movie = { title, director, genre, actor, year };
   await db.insertMovie(movie);
   res.redirect("/");
 }
 
+async function deleteMovie(req, res) {
+  const movieId = req.params.id;
+  await db.removeMovie(movieId);
+  res.redirect("/");
+}
+
 async function deleteMovies(req, res) {
-  const movies = await db.getAllMovies();
-  await db.removeMovie(movies)
+  await db.removeAllMovies();
   res.redirect("/");
 }
 
@@ -29,10 +35,33 @@ async function searchMovies(req, res) {
   res.send("Search results: " + searchResults.map(movie => movie.title).join(", "));
 }
 
+async function updateMovieGet(req, res) {
+  const movieId = req.params.id;
+  const movie = await db.getMovieById(movieId);
+
+  if (movie) {
+    res.render("updateMovie", { movie });
+  } else {
+    res.status(404).send("Movie not found");
+  }
+}
+
+async function updateMoviePost(req, res) {
+  const movieId = req.params.id;
+  const { title, director, genre, actor, year } = req.body;
+
+  await db.updateMovie(movieId, { title, director, genre, actor, year });
+
+  res.redirect("/");
+}
+
 module.exports = {
   getMovies,
   createMovieGet,
   createMoviePost,
+  deleteMovie,
   deleteMovies,
-  searchMovies
+  searchMovies,
+  updateMovieGet,
+  updateMoviePost
 };

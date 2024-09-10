@@ -1,0 +1,23 @@
+<!-- views/search.ejs -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie Inventory Application</title>
+  </head>
+<body>
+  <h1>Movie Inventory Application</h1>
+  <%- include("partials/errors.ejs") %>
+  <% if (movie) { %>
+    <li>
+      Title: <%= movie.title %>, 
+      Director: <%= movie.director %>,
+      Genre: <%= movie.genre %>,
+      Actor: <%= movie.actor %>,
+      Year: <%= movie.year %>
+    </li>
+  <% } else { %>
+    <p>No movie found</p>
+  <% } %>
+  <a href="/">Back to home</a>
+</body>
+</html>

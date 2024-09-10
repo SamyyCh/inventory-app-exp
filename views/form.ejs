@@ -8,8 +8,16 @@
   <h1>Movie Inventory Application</h1>
   <%- include("partials/errors.ejs") %>
   <form action="/new" method="POST">
-    <label for="movie">Movie: </label>
-    <input type="text" name="movie" id="movie" required>
+    <label for="title">Movie Title: </label>
+    <input type="text" name="title" id="title" required>
+    <label for="director">Director: </label>
+    <input type="text" name="director" id="director" required>
+    <label for="genre">Genre: </label>
+    <input type="text" name="genre" id="genre" required>
+    <label for="actor">Main Actor: </label>
+    <input type="text" name="actor" id="actor" required>
+    <label for="year">Year: </label>
+    <input type="text" name="year" id="year" required>
     <button type="submit">Submit</button>
   </form>
   <a href="/">Back to home</a>
