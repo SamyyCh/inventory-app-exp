@@ -11,6 +11,7 @@ movieRouter.get("/searchResult", movieController.searchMovieGet);
 movieRouter.get("/edit/:id", movieController.updateMovieGet);
 movieRouter.post("/edit/:id", movieController.updateMoviePost);
 movieRouter.get("/delete/:id", movieController.deleteMovie);
+movieRouter.post("/deleteShown", movieController.deleteMoviesShown);
 movieRouter.get("/delete", movieController.deleteMovies);
 
 module.exports = movieRouter;
