@@ -1,0 +1,25 @@
+<!-- views/searchForm.ejs -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie Inventory Application</title>
+  </head>
+<body>
+  <h1>Movie Inventory Application</h1>
+  <%- include("partials/errors.ejs") %>
+  <form action="/searchResult" method="GET">
+    <label for="title">Movie Title: </label>
+    <input type="text" name="title" id="title">
+    <label for="director">Director: </label>
+    <input type="text" name="director" id="director">
+    <label for="genre">Genre: </label>
+    <input type="text" name="genre" id="genre">
+    <label for="actor">Main Actor: </label>
+    <input type="text" name="actor" id="actor">
+    <label for="year">Year: </label>
+    <input type="text" name="year" id="year">
+    <button type="submit">Submit</button>
+  </form>
+  <a href="/">Back to home</a>
+</body>
+</html>

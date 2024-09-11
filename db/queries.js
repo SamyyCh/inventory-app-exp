@@ -9,11 +9,32 @@ async function insertMovie(movie) {
   await pool.query("INSERT INTO inventory (title, director, genre, actor, year) VALUES ($1, $2, $3, $4, $5)", [movie.title, movie.director, movie.genre, movie.actor, movie.year]);
 }
 
-async function searchMovie(search) {
-  const { rows } = await pool.query(
-    "SELECT * FROM inventory WHERE title LIKE $1",
-    [`%${search}%`]
-  );
+async function searchMovies({ title, director, genre, actor, year }) {
+  let query = "SELECT * FROM inventory WHERE 1=1";
+  const values = [];
+
+  if (title) {
+    query += " AND title ILIKE $1";
+    values.push(`%${title}%`);
+  }
+  if (director) {
+    query += " AND director ILIKE $" + (values.length + 1);
+    values.push(`%${director}%`);
+  }
+  if (genre) {
+    query += " AND genre ILIKE $" + (values.length + 1);
+    values.push(`%${genre}%`);
+  }
+  if (actor) {
+    query += " AND actor ILIKE $" + (values.length + 1);
+    values.push(`%${actor}%`);
+  }
+  if (year) {
+    query += " AND year = $" + (values.length + 1);
+    values.push(year);
+  }
+
+  const { rows } = await pool.query(query, values);
   return rows;
 }
 
@@ -41,7 +62,7 @@ async function updateMovie(id, movie) {
 module.exports = {
   getAllMovies,
   insertMovie,
-  searchMovie,
+  searchMovies,
   removeMovie,
   removeAllMovies,
   getMovieById,

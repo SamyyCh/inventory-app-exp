@@ -29,10 +29,19 @@ async function deleteMovies(req, res) {
   res.redirect("/");
 }
 
-async function searchMovies(req, res) {
-  const { movie } = req.query;
-  const searchResults = await db.searchMovie(movie);
-  res.send("Search results: " + searchResults.map(movie => movie.title).join(", "));
+async function searchMovie(req, res) {
+  res.render("searchForm");
+}
+
+async function searchMovieGet(req, res) {
+  const { title, director, genre, actor, year } = req.query;
+  const searchResults = await db.searchMovies({ title, director, genre, actor, year });
+  
+  if (searchResults.length > 0) {
+    res.render("search", { searchResults });
+  } else {
+    res.status(404).send("No movies found");
+  }
 }
 
 async function updateMovieGet(req, res) {
@@ -61,7 +70,8 @@ module.exports = {
   createMoviePost,
   deleteMovie,
   deleteMovies,
-  searchMovies,
+  searchMovieGet,
+  searchMovie,
   updateMovieGet,
   updateMoviePost
 };
