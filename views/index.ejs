@@ -14,7 +14,9 @@
     <% if (locals.movies) { %>
       <% movies.forEach(function(movie) { %>
         <li>
-            <img src="https://image.tmdb.org/t/p/w500<%= movie.poster %>" alt="<%= movie.title %> Poster" id="poster" />
+            <a href="/searchResult?title=<%= movie.title %>&director=&genre=&actor=&year=">
+              <img src="https://image.tmdb.org/t/p/w500<%= movie.poster %>" alt="<%= movie.title %> Poster" id="poster" />
+            </a>
             <div id="movie">Movie: <%= movie.title %> </div>
             <div id="director">Director: <%= movie.director %></div>
             <div id="genre">Genre: <%= movie.genre %></div>
