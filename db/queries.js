@@ -1,4 +1,5 @@
 const pool = require("./pool");
+const axios = require("axios");
 
 async function getAllMovies() {
   const { rows } = await pool.query("SELECT * FROM inventory");
@@ -6,7 +7,22 @@ async function getAllMovies() {
 }
 
 async function insertMovie(movie) {
-  await pool.query("INSERT INTO inventory (title, director, genre, actor, year) VALUES ($1, $2, $3, $4, $5)", [movie.title, movie.director, movie.genre, movie.actor, movie.year]);
+  try {
+    const apiKey = "";
+    const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(movie.title)}`);
+    
+    let posterPath = null;
+    if (response.data.results && response.data.results.length > 0) {
+      posterPath = response.data.results[0].poster_path;
+    }
+
+    await pool.query(
+      "INSERT INTO inventory (title, director, genre, actor, year, poster) VALUES ($1, $2, $3, $4, $5, $6)",
+      [movie.title, movie.director, movie.genre, movie.actor, movie.year, posterPath]
+    );
+  } catch (error) {
+    console.error("Error fetching movie data:", error);
+  }
 }
 
 async function searchMovies({ title, director, genre, actor, year }) {

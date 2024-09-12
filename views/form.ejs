@@ -1,9 +1,9 @@
-<!-- views/form.ejs -->
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Movie Inventory Application</title>
-  </head>
+<head>
+  <title>Movie Inventory Application</title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/form.css">
+</head>
 <body>
   <h1>Movie Inventory Application</h1>
   <%- include("partials/errors.ejs") %>
@@ -20,6 +20,7 @@
     <input type="text" name="year" id="year" required>
     <button type="submit">Submit</button>
   </form>
-  <a href="/">Back to home</a>
+  <a id="home" href="/">Back to home</a>
+  <!-- <footer>Copyright Samy Chattali 2024</footer> -->
 </body>
 </html>

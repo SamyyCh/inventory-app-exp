@@ -1,34 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Movie Inventory Application</title>
-  </head>
+<head>
+  <title>Movie Inventory Application</title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/search.css">
+</head>
 <body>
-  <h1>Movie Inventory Application</h1>
-  <%- include("partials/errors.ejs") %>
+  <header>
+    <a id="svgLogo" href="/">Home</a>
+    <h1>Movie Inventory Application</h1>
+    <a id="searchLink" href="/search">Search</a>
+  </header>
+  <main>
+    <%- include("partials/errors.ejs") %>
+    <form action="/deleteShown" method="POST">
+      <% if (searchResults.length > 0) { %>
+        <ul>
+          <% searchResults.forEach(movie => { %>
+            <li>
+              <img src="https://image.tmdb.org/t/p/w500<%= movie.poster %>" alt="<%= movie.title %> Poster" id="poster" />
+              <div id="movie">Movie: <%= movie.title %> </div>
+              <div id="director">Director: <%= movie.director %></div>
+              <div id="genre">Genre: <%= movie.genre %></div>
+              <div id="actor">Main Actor: <%= movie.actor %></div>
+              <div id="year">Year: <%= movie.year %></div>
+              <div class="functionLinks">
+                <a id="edit" href="/edit/<%= movie.id %>">Update</a>
+                <a id="delete" href="/delete/<%= movie.id %>">Delete</a>
+              </div>
+              <input type="hidden" name="movieIds[]" value="<%= movie.id %>">
+            </li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <p>No movie found</p>
+      <% } %>
+      <button type="submit">Delete all movies shown</button>
+    </form>
+    <a id="home" href="/">Back to home</a>
+  </main>
 
-  <form action="/deleteShown" method="POST">
-    <% if (searchResults.length > 0) { %>
-      <ul>
-        <% searchResults.forEach(movie => { %>
-          <li>
-            Title: <%= movie.title %>, 
-            Director: <%= movie.director %>,
-            Genre: <%= movie.genre %>,
-            Actor: <%= movie.actor %>,
-            Year: <%= movie.year %>
-            <a href="/edit/<%= movie.id %>">Update</a>
-            <a href="/delete/<%= movie.id %>">Delete</a>
-            <input type="hidden" name="movieIds[]" value="<%= movie.id %>">
-          </li>
-        <% }) %>
-      </ul>
-    <% } else { %>
-      <p>No movie found</p>
-    <% } %>
-    <button type="submit">Delete all movies shown</button>
-  </form>  
-
-  <a href="/">Back to home</a>
+  <footer>Copyright Samy Chattali 2024</footer>
 </body>
 </html>

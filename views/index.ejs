@@ -2,25 +2,36 @@
 <html>
 <head>
   <title>Movie Inventory Application</title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/index.css">
 </head>
 <body>
-  <h1>Movie Inventory Application</h1>
+  <header>
+    <a id="svgLogo" href="/">Home</a>
+    <h1>Movie Inventory Application</h1>
+    <a id="searchLink" href="/search">Search</a>
+  </header>
   <ul>
     <% if (locals.movies) { %>
       <% movies.forEach(function(movie) { %>
-        <li>Movie: <%= movie.title %>, 
-            Director: <%= movie.director %>,
-            Genre: <%= movie.genre %>,
-            Main Actor: <%= movie.actor %>,
-            Year: <%= movie.year %>
-            <a href="/edit/<%= movie.id %>">Update</a>
-            <a href="/delete/<%= movie.id %>">Delete</a>
+        <li>
+            <img src="https://image.tmdb.org/t/p/w500<%= movie.poster %>" alt="<%= movie.title %> Poster" id="poster" />
+            <div id="movie">Movie: <%= movie.title %> </div>
+            <div id="director">Director: <%= movie.director %></div>
+            <div id="genre">Genre: <%= movie.genre %></div>
+            <div id="actor">Main Actor: <%= movie.actor %></div>
+            <div id="year">Year: <%= movie.year %></div>
+            <div class="functionLinks">
+              <a id="edit" href="/edit/<%= movie.id %>">Update</a>
+              <a id="delete" href="/delete/<%= movie.id %>">Delete</a>
+            </div>
         </li>
       <% }); %>
     <% } %>
-  </ul>  
-  <a href="/new">Add a movie</a>
-  <a href="/search">Search a movie</a>
-  <a href="/delete">Delete all movies</a>
+  </ul>
+  <div class="functionLinks">
+    <a id="add" href="/new">Add a movie</a>
+    <a id="deleteAll" href="/delete">Delete all movies</a>
+  </div>
+  <footer>Copyright Samy Chattali 2024</footer>
 </body>
 </html>
