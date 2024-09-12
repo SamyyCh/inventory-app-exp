@@ -1,5 +1,3 @@
-// controllers/movieController.js
-
 const db = require("../db/queries");
 
 async function getMovies(req, res) {
@@ -36,8 +34,15 @@ async function deleteMoviesShown(req, res) {
 }
 
 async function deleteMovies(req, res) {
-  await db.removeAllMovies();
-  res.redirect("/");
+  const inputPassword = req.body.password;
+  const correctPassword = process.env.DELETE_MOVIES_PASSWORD;
+
+  if (inputPassword === correctPassword) {
+    await db.removeAllMovies();
+    res.redirect("/");
+  } else {
+    res.status(403).send("Forbidden: Incorrect password");
+  }
 }
 
 async function searchMovie(req, res) {
