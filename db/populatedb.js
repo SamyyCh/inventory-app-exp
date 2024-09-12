@@ -25,7 +25,7 @@ VALUES
 async function main() {
   console.log("seeding...");
   const client = new Client({
-    connectionString: "postgresql://postgres:XjFQohENhWGziwAqGaYrAgMbsHJoKpZR@postgres.railway.internal:5432/railway",
+    connectionString: "postgresql://postgres:XjFQohENhWGziwAqGaYrAgMbsHJoKpZR@junction.proxy.rlwy.net:46635/railway",
   });
   await client.connect();
   await client.query(SQL);
