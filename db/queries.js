@@ -8,6 +8,7 @@ async function getAllMovies() {
 
 async function insertMovie(movie) {
   try {
+    const apiKey = process.env.API_KEY;
     const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(movie.title)}`);
     
     let posterPath = null;
