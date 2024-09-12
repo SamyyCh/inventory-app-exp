@@ -8,5 +8,4 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/", movieRouter);
 app.use(express.static('public'));
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Express app listening on port ${PORT}!`));
+module.exports = app;
