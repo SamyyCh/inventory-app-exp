@@ -122,3 +122,11 @@
     border-radius: 5px;
     border: 1px solid black;
   }
+
+  @media screen and (max-width: 600px) {
+
+    ul {
+      grid-template-columns: 1fr;
+    }
+  
+  }

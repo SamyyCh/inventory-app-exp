@@ -109,3 +109,11 @@ li {
 .functionLinks a:hover {
   color: black;
 }
+
+@media screen and (max-width: 600px) {
+
+  ul {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
