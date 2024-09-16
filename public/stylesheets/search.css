@@ -128,5 +128,9 @@
     ul {
       grid-template-columns: 1fr;
     }
+
+    li {
+      grid-column: 1;
+    }
   
   }
